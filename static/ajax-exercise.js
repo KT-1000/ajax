@@ -4,8 +4,10 @@
 // PART 1: SHOW A FORTUNE
 
 function showFortune(evt) {
-
-    // TODO: get the fortune and show it in the #fortune-text div
+    
+    $.get('/fortune', function(result) {
+    	$("#fortune-text").html(result);
+    });
 }
 
 $('#get-fortune-button').on('click', showFortune);
@@ -19,9 +21,10 @@ $('#get-fortune-button').on('click', showFortune);
 function showWeather(evt) {
     evt.preventDefault();
 
-    var url = "/weather?zipcode=" + $("#zipcode-field").val();
-
-    // TODO: request weather with that URL and show the forecast in #weather-info
+    $.get("/weather.json?zipcode=" + $("#zipcode-field").val(), 
+    	function(result) {
+    	$("#weather-info").html(result.forecast);
+    });
 }
 
 $("#weather-form").on('submit', showWeather);
